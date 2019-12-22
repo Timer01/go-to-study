@@ -1,0 +1,49 @@
+/**index.wxss**/
+.box{
+  border:1rpx solid black;
+  height: 482rpx;
+  width:full;
+}
+ page {
+  background: lightgoldenrodyellow;
+}  
+.jihua{
+  height: 50rpx;
+  width: 30%;
+  background-color: yellow;
+  border-radius:10px;
+}
+
+.box1{
+  border:15rpx dashed red;
+  height: 550rpx;
+  width: full;
+  background-color: yellow;
+}
+
+.todo-add {
+  position: fixed;
+  /*left: 50%;*/
+  right: 50rpx;
+  bottom: 60rpx;
+  width: 90rpx;
+  height: 90rpx;
+  margin-left: -45rpx;
+  border-radius: 50%;
+  font-size: 60rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-color: #09bb07;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.b-ipt{
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+.del{
+    width: 40px;
+    float: right;
+    margin-left: 10px;
+}

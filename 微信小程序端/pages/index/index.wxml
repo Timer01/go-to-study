@@ -1,0 +1,18 @@
+<view class='box'>
+  <image src="/images/01.png" mode="scaleToFill" style="width:100%"></image>
+</view>
+<view class='jihua'>
+  <view class='font' style='color:blue;flex-grow:1'>计划一览:</view>
+</view>
+<view class='box1'>
+<view wx:for='{{array}}' wx:key=''>
+    <view class='del' bindtap='delInput' data-idx='{{index}}'>删除</view>
+    <input type='text' class='b-ipt' placeholder='请输入' data-idx='{{index}}' value='{{inputVal[index]}}' bindinput='getInputVal'/>    
+</view>
+<view class="todo-add" bindtap="tap">+</view>
+<view>
+<modal title='新增' cancel-text='关闭' confirm-text='确定' hidden='{{mhidden}}' bindconfirm='changemodal' bindcancel='modalcancel' >
+是否新增计划？
+</modal>
+</view>
+</view>
