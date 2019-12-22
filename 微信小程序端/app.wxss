@@ -1,0 +1,14 @@
+/**app.wxss**/
+.font{
+  font-family: SimHei;
+  font-size:larger;
+  font-weight: bolder;
+}
+
+.bankuai{
+  flex-grow:1;
+  border:solid 2rpx;
+  margin-top:10rpx;
+  background-color:Beige;
+  color:blue;
+}
