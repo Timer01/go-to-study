@@ -1,0 +1,108 @@
+#define PIN 4   /*定义了控制LED的引脚，6表示Microduino的D6引脚，可通过Hub转接出来，用户可以更改 */
+#include <SoftwareSerial.h>
+#include <IRremote.h>
+int RECV_PIN = 10;   
+IRrecv irrecv(RECV_PIN);  //定义IRrecv对象来接收红外线信号
+decode_results results;   //解码结果放在decode_results构造的对象results里
+#include <Wire.h>
+#include "Rtc_Pcf8563.h"//使用rtc模块
+#include <U8glib.h>//使用OLED需要包含这个头文件
+#define INTERVAL_LCD 20 //定义OLED刷新时间间隔 
+unsigned long lcd_time = millis(); //OLED刷新时间计时器
+U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE); //设置OLED型号 
+//-------字体设置，大、中、小
+#define setFont_M u8g.setFont(u8g_font_fixed_v0r)
+#define setFont_L u8g.setFont(u8g_font_7x13)
+Rtc_Pcf8563 rtc;//定义rtc
+#define buzzer_pin 8 //定义蜂鸣器驱动引脚
+int buzzer_fre= 0;//定义蜂鸣器输出频率
+int hour=3;
+int i=0;
+int minute=30;
+int time;
+unsigned long password[5]={33456255,33456255,33456255,33456255,33456255};
+unsigned long answer[5];
+
+void settime(int _year, int _month, int _day, int _week, int _hour, int _min, int _sec)
+{
+  rtc.initClock();
+  rtc.setDate(_day, _week, _month, 0, _year);
+  rtc.setTime(_hour, _min, _sec);
+}
+
+int unlock()
+{
+  int m=0;
+if (irrecv.decode(&results))
+{if(i<=4)
+{Serial.println(results.value, DEC);//
+answer[i]=results.value;
+i++;
+irrecv.resume();
+}
+else if(i=5)
+{
+  for(i=0;i<=4;i++)
+{if(answer[i]==password[i])
+m++;
+}
+return m;
+}
+}
+}
+
+
+void setup() {
+Wire.begin();
+Serial.begin(9600);  //设置串口通讯波特率
+pinMode(buzzer_pin, OUTPUT);//蜂鸣器为输出状态
+settime(19,12,23,1,1,45,0);//年，月，日，星期，时，分，秒设置时间
+irrecv.enableIRIn(); // 启动红外解
+}
+
+
+void loop() {
+coutOLED();
+if ((rtc.getHour()==hour)&&(rtc.getMinute()==minute))
+{  
+tone(buzzer_pin,buzzer_fre);
+time=rtc.getSecond();
+Serial.println("闹钟已开启");
+        }
+if(((time-rtc.getSecond())==1)||((time-rtc.getSecond())==-59))
+{
+  if(buzzer_fre<=800)
+  {
+    buzzer_fre=buzzer_fre+100;
+  }
+}
+if(unlock()==5)
+{
+  noTone(buzzer_pin);
+  Serial.println("闹钟已关闭");//蜂鸣器不响
+  for(int i=0;i<=4;i++)
+  {
+    answer[i]=0;
+  }
+     }
+
+       }
+
+
+
+void coutOLED()
+{
+   u8g.firstPage();
+ do {
+ setFont_L;
+ u8g.setPrintPos(3, 10);
+ u8g.print("Date:");
+ u8g.print(rtc.formatDate());//打印日期
+ u8g.setPrintPos(3, 20);
+ u8g.print("Time:");
+ u8g.print(rtc.formatTime());//打印时间
+  }while( u8g.nextPage() );
+
+}
+
+
