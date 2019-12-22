@@ -1,0 +1,30 @@
+<!--pages/function/function.wxml-->
+<view class='box'>
+<view class="font">闹钟设置</view>
+</view>
+<view class='box' font-style='font' data-idx='{{index}}'>
+<label class="field-control time-picker">
+        <picker class="w-full todo-item__date" mode="date" bindchange="handleEndDateChange">
+          {{endDate ? endDate:"日期"}}
+        </picker>
+      </label>
+      <label class="field-control">
+        <picker class="w-full todo-item__time" mode="time" bindchange="handleEndTimeChange">
+          {{endTime ? endTime:"时间"}}
+        </picker>
+      </label>
+</view>
+<view class='box'>
+<view class='font' bindtap="turnoff">关闭闹钟</view>
+</view>
+<view>
+<modal title='请问'   hidden='{{mhidden}}' cancel-text='' confirm-text='' style='font-weight:bold'>
+{{question[number]}}
+<view style="display:flex">
+<button style="flex-grow:1" bindtap="A">A</button>
+<button style="flex-grow:1" bindtap="B">B</button>
+<button style="flex-grow:1" bindtap="C">C</button>
+<button style="flex-grow:1" bindtap="D">D</button>
+</view>
+</modal>
+</view>

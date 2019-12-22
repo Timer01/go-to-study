@@ -1,0 +1,41 @@
+/* pages/function/function.wxss */
+page{
+  background-color: lightyellow
+}
+
+.box{
+  margin:20px 20px;
+  background-color:lightblue;
+  border-radius: 20%;
+  line-height: 50px;
+  width:90%;
+  text-align: center;
+}
+.del{
+    width: 40px;
+    float: right;
+    margin-left: 20px;
+    color: red
+}
+.field-control {
+  flex: 8;
+  padding: 0 0 0 32rpx;
+  font-size: 32rpx;
+}
+.todo-item__date {
+  font-size: 28rpx;
+  color: black;
+  display: inline-block;
+  text-align: center;
+}
+
+.todo-item__time {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  color: black;
+  display: inline-block;
+  text-align: center;
+}
+.time-picker {
+  padding: 0rpx;
+}
