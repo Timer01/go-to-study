@@ -1,0 +1,4 @@
+/* pages/sousuo/sousuo.wxss */
+page{
+    background:lightyellow;
+}

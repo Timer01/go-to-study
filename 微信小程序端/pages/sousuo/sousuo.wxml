@@ -1,0 +1,11 @@
+<!--pages/sousuo/sousuo.wxml-->
+<view style="display:flex;height:135px;">
+<image style="height:135px;margin-right:0px;margin-left:30px" src="/images/tianqi.png" bindtap="send"></image>
+<picker  mode = "selector" bindchange="change" value="{{zhou}}" range="{{zhouji}}" >
+<image  style="height:135px;width:150px;margin-left:30px;margin-right:30px" src="/images/xuexi.png"  ></image>
+</picker>
+</view>
+<view style="display:flex;margin-top:0px;margin-left:70px;margin-right:30px;">
+<view class="{{font}}" style="flex-grow:1;margin-right:50px" >天气查询</view>
+<view class="{{font}}" style="flex-grow:1;margin-left:0px">空闲教室查询</view>
+</view>
